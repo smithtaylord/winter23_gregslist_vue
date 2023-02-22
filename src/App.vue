@@ -9,17 +9,19 @@
       </div>
 
       <div class="mb-2">
-        <router-link class="text-success lighten-30 selectable text-uppercase" :to="{name: 'Cars'}">
+        <router-link class="text-success lighten-30 selectable text-uppercase" :to="{ name: 'Cars' }">
           CARS
         </router-link>
       </div>
       <div>
-        <router-link :to="{name: 'Houses'}" class="text-success lighten-30 selectable text-uppercase">
+        <router-link :to="{ name: 'Houses' }" class="text-success lighten-30 selectable text-uppercase">
           HOUSES
         </router-link>
       </div>
       <div>
-        JOBS
+        <router-link :to="{ name: 'Jobs' }" class="text-success lighten-30 selectable text-uppercase">
+          JOBS
+        </router-link>
       </div>
 
     </div>
