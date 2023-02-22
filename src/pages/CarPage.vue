@@ -3,7 +3,7 @@
     <div class="container">
       <div class="row my-3">
         <div class="col-md-8 m-auto">
-          <CarCard :car="car" :showSeller="false"/>
+          <CarCard :car="car" :showSeller="false" />
           <div class="card my-2">
             <div class="card-body">
               <p>
@@ -19,9 +19,15 @@
 
             </div>
 
-            <div class="card-footer text-end">
-              <span class="me-2">{{ car.seller.name }}</span>
-              <img height="64" width="64" :src="car.seller.picture" :alt="car.seller.name">
+            <div class="card-footer d-flex align-items-center justify-content-between">
+              <div>
+                <button @click="removeListing" v-if="account.id == car.creatorId" class="btn btn-danger">remove
+                  listing</button>
+              </div>
+              <div>
+                <span class="me-2">{{ car.seller.name }}</span>
+                <img height="64" width="64" :src="car.seller.picture" :alt="car.seller.name">
+              </div>
             </div>
 
           </div>
@@ -40,6 +46,7 @@
 import { computed, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 import { AppState } from '../AppState.js';
+import { router } from '../router.js';
 import { carsService } from '../services/CarsService.js';
 import Pop from '../utils/Pop.js';
 
@@ -54,7 +61,6 @@ export default {
       } catch (error) {
         Pop.error(error, '[Getting Car By Id]')
       }
-
     }
 
     onMounted(() => {
@@ -65,7 +71,16 @@ export default {
 
     return {
       carId,
-      car: computed(() => AppState.car)
+      account: computed(() => AppState.account),
+      car: computed(() => AppState.car),
+      async removeListing() {
+        try {
+          await carsService.removeCar(carId)
+          router.push({ name: 'Cars' })
+        } catch (error) {
+          Pop.error(error, '[Removing Car]')
+        }
+      }
     }
   }
 }

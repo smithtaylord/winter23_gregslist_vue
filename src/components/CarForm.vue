@@ -17,7 +17,8 @@
     </div>
     <div class="mb-3">
       <label for="img" class="form-label">img</label>
-      <input required type="text" v-model="editable.imgUrl" class="form-control" id="img" placeholder="img..." name="imgUrl">
+      <input required type="text" v-model="editable.imgUrl" class="form-control" id="img" placeholder="img..."
+        name="imgUrl">
     </div>
     <div class="mb-3">
       <label for="price" class="form-label">price</label>
@@ -47,6 +48,7 @@
 
 <script>
 import { ref } from 'vue';
+import { router } from '../router.js';
 import { carsService } from '../services/CarsService.js';
 import Pop from '../utils/Pop.js';
 
@@ -62,13 +64,15 @@ export default {
       engineTypes: ['unknown', '2 stroke', '4 cylinder', 'v6', 'v8', 'v10', 'v12', 'small', 'medium', 'large', 'chuncko'],
       async handleSubmit() {
         try {
-          editable.value.id
+          const car = editable.value.id
             ? await carsService.editCar(editable.value)
             : await carsService.createCar(editable.value)
 
           // clears the form
           editable.value = {}
-
+          if (car?.id) {
+            router.push({ name: 'Car', params: { carId: car.id } })
+          }
           // if (editable.value.id) {
           //   await carsService.editCar(editable.value)
           // }else{
