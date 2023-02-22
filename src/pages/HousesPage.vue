@@ -3,9 +3,8 @@
 
     <div class="container">
       <div class="row">
-        <div class="col-md-4" v-for="h in houses">
+        <div class="col-md-4 mb-3" v-for="h in houses">
           <HouseCard :house="h" />
-          <div>{{ h.bathrooms }}</div>
         </div>
       </div>
     </div>
