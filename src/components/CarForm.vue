@@ -31,7 +31,7 @@
     </div>
     <div class="mb-3">
       <label for="engineType" class="form-label">Engine Type picker</label>
-      <select name="engineType" id="engineType">
+      <select name="engineType" id="engineType" v-model="editable.engineType">
         <option v-for="e in engineTypes" :value="e" class="text-capitalize">{{ e }}</option>
       </select>
     </div>

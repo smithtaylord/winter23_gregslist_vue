@@ -25,6 +25,12 @@ class CarsService {
     AppState.cars.splice(i, 1, res.data)
   }
 
+  async getCarById(carId) {
+    AppState.car = null
+    const res = await api.get('api/cars/' + carId)
+    AppState.car = res.data
+  }
+
 
 }
 

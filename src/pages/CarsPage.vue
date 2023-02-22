@@ -1,9 +1,23 @@
 <template>
   <div class="carsPage">
-    <h1>This is the cars page</h1>
-    {{ cars }}
 
-    <button data-bs-toggle="modal" data-bs-target="#test-modal">open the modal</button>
+    <div class="container">
+      <div class="row flex-grow-1">
+        <div class="col-md-4 my-3" v-for="c in cars">
+          <CarCard :car="c" />
+        </div>
+
+      </div>
+      <div class="row sticky-bottom" v-if="account.id">
+        <div class="col-12 text-end">
+          <button class="fs-5 btn btn-dark" data-bs-toggle="modal" data-bs-target="#test-modal">
+            🚗
+          </button>
+        </div>
+      </div>
+    </div>
+
+
 
 
 
@@ -36,6 +50,7 @@ export default {
     })
 
     return {
+      account: computed(() => AppState.account),
       cars: computed(() => AppState.cars)
     }
   }
