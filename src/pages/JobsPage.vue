@@ -1,6 +1,12 @@
 <template>
     <div class="component">
-        YO THIS IS THE JOBS PAGE
+        <div class="container">
+            <div class="row">
+                <div class="col-10 m-auto mb-3" v-for="j in jobs">
+                    <JobCard :job="j" />
+                </div>
+            </div>
+        </div>
 
 
         <div class="row sticky-bottom">
@@ -10,11 +16,15 @@
             </div>
         </div>
     </div>
+    <Modal id="test-modal" modal-title="Add a Job 👷👨‍💼👮‍♂️👨‍🏭">
+        <JobForm />
+    </Modal>
 </template>
 
 
 <script>
-import { onMounted } from 'vue';
+import { onMounted, computed } from 'vue';
+import { AppState } from '../AppState.js';
 import { jobsService } from '../services/JobsService.js';
 import Pop from '../utils/Pop.js';
 
@@ -30,7 +40,10 @@ export default {
         onMounted(() => {
             getJobs()
         })
-        return {}
+        return {
+            jobs: computed(() => AppState.jobs),
+            account: computed(() => AppState.account)
+        }
     }
 }
 </script>

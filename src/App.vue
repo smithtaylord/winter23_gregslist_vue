@@ -13,12 +13,12 @@
           CARS
         </router-link>
       </div>
-      <div>
+      <div class="mb-2">
         <router-link :to="{ name: 'Houses' }" class="text-success lighten-30 selectable text-uppercase">
           HOUSES
         </router-link>
       </div>
-      <div>
+      <div class="mb-2">
         <router-link :to="{ name: 'Jobs' }" class="text-success lighten-30 selectable text-uppercase">
           JOBS
         </router-link>
